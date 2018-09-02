@@ -2,17 +2,15 @@ from ST.ST import *
 
 St1 = ST(17, "Sounding1.csv", "SoundingData")
 
-#La siguiente variable será una lista donde se añadirán todos los finales
-#de carrera que se quieran evaluar.
+#The list "List_ST" keep the object "ST"
+List_ST = []
 
-Lista_ST = []
-
-Lista_ST.append( St1 )
+List_ST.append( St1 )
 
 try:
     while True:
 
-        for St in Lista_ST:
+        for St in List_ST:
 
             St.UpdateWorkTime("07:00:00", "13:00:00")
 
@@ -24,8 +22,7 @@ try:
 
                     St.readSensor( 20 )
 
-                    # El siguiente paso será escribir los datos en la base de Datos
-                    # Pasamos los datos de la base de datos, se conecta Inserta los datos y cierra conexion4
+                    #Write the data of sensor in the data base. The variables of function is data about data base
                     St.InsertDataDB("localhost", "doorctrl", "Brggroup27", "doorctrldb")
 
             

@@ -1,38 +1,34 @@
 from FC.FC import *
 
-#Configuramos los pines GPIO como BCM
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-#Variables de los pines del sensor y Led
+
+#Set up Limit sensores and Led
 Led = 3
 Fc1 = FC(2, "Door1.csv", "doordata")
 
 Fc2 = FC(17, "Door2.csv", "doord2")
 
-#Configuramos los pines de Entrada o de salida
-#Incluimos la resistencia pull down -> conectar señal y tierra(Sensor)
+#Set Up Output and input pins
 GPIO.setup(Led, GPIO.OUT)
 
-#La siguiente variable será una lista donde se añadirán todos los finales
-#de carrera que se quieran evaluar.
+#The list "List_FC" keep all limit sensor that we create
+List_FC = []
 
-Lista_FC = []
+List_FC.append( Fc1 )
 
-Lista_FC.append( Fc1 )
-
-Lista_FC.append( Fc2 )
+List_FC.append( Fc2 )
 
 try:
     while True:
 
-        for Fc in Lista_FC:
+        for Fc in List_FC:
 
-            Fc.DataDB() #Actualiza los datos para insertarla en la base de datos
+            Fc.DataDB() #Update the data of sensors
 
             if Fc.FlankDecent():
 
-                # El siguiente paso será escribir los datos en la base de Datos
-                # Pasamos los datos de la base de datos, se conecta Inserta los datos y cierra conexion4
+                #Write the data of sensor in the data base. The variables of function is data about data base
                 Fc.InsertDataDB("localhost", "doorctrl", "Brggroup27", "doorctrldb")
 
             Fc.UpdateStatus()

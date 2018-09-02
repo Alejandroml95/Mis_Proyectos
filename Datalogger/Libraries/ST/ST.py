@@ -9,7 +9,7 @@ from datetime import datetime
 
 import pymysql.cursors #Connect Python with Mysql
 
-#This object defind a limit sensor connect to raspberry pi.
+#This object defind a DHT22 sensor connect to raspberry pi.
 #It set up is:
 #Pin: Pin to which the sensor is connected
 #NameFile: In the file with name "NameFile" is written the data of sensor in format "CSV"
